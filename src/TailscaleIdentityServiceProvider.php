@@ -13,7 +13,8 @@ final class TailscaleIdentityServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-tailscale-identity')
-            ->hasConfigFile();
+            ->hasConfigFile()
+            ->hasCommand(Commands\VerifyTopologyCommand::class);
     }
 
     public function packageRegistered(): void
