@@ -6,5 +6,9 @@ parameters:
     paths:
         - src
         - config
-        - database
     tmpDir: build/phpstan
+    ignoreErrors:
+        # This IS the package's published config file; larastan only
+        # recognizes an application's own config directory.
+        - identifier: larastan.noEnvCallsOutsideOfConfig
+          path: config/tailscale-identity.php

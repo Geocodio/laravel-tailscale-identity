@@ -23,13 +23,13 @@ final class VerifyTopologyCommand extends Command
     public function handle(): int
     {
         $binary = (string) config('tailscale-identity.binary', 'tailscale');
-        $ok = true;
+        $results = [];
 
         $version = Process::timeout(5)->run([$binary, 'version']);
-        $ok = $this->report('tailscale CLI present', $version->successful(), trim($version->errorOutput())) && $ok;
+        $results[] = $this->report('tailscale CLI present', $version->successful(), trim($version->errorOutput()));
 
         $status = Process::timeout(5)->run([$binary, 'status', '--json']);
-        $ok = $this->report('LocalAPI socket reachable', $status->successful(), trim($status->errorOutput())) && $ok;
+        $results[] = $this->report('LocalAPI socket reachable', $status->successful(), trim($status->errorOutput()));
 
         if ($status->successful()) {
             /** @var array<string, mixed> $data */
@@ -37,14 +37,14 @@ final class VerifyTopologyCommand extends Command
             $self = is_array($data['Self'] ?? null) ? $data['Self'] : [];
             $ips = array_values(array_filter((array) ($self['TailscaleIPs'] ?? []), 'is_string'));
             $inRange = $ips !== [] && ! in_array(false, array_map(TailscaleAddressRange::contains(...), $ips), true);
-            $ok = $this->report('node addresses inside Tailscale ranges', $inRange, implode(', ', $ips)) && $ok;
+            $results[] = $this->report('node addresses inside Tailscale ranges', $inRange, implode(', ', $ips));
         }
 
         $proxies = Request::getTrustedProxies();
         $wildcarded = array_intersect(['*', '0.0.0.0/0', '::/0'], $proxies) !== [];
-        $ok = $this->report('trusted proxies not wildcarded', ! $wildcarded, implode(', ', $proxies) ?: '(none)') && $ok;
+        $results[] = $this->report('trusted proxies not wildcarded', ! $wildcarded, implode(', ', $proxies) ?: '(none)');
 
-        return $ok ? self::SUCCESS : self::FAILURE;
+        return in_array(false, $results, true) ? self::FAILURE : self::SUCCESS;
     }
 
     private function report(string $check, bool $passed, string $detail = ''): bool
