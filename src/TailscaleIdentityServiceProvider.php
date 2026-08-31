@@ -45,6 +45,10 @@ final class TailscaleIdentityServiceProvider extends PackageServiceProvider
         // Boot-time guard: a fake driver in the wrong environment fails at
         // boot, not on the first request.
         FakeDriverGuard::check((string) config('tailscale-identity.driver'), $this->app->environment());
+
+        $router = $this->app['router'];
+        $router->aliasMiddleware('tailscale.identity', Middleware\ResolveTailscaleIdentity::class);
+        $router->aliasMiddleware('tailscale.capability', Middleware\EnsureCapability::class);
     }
 
     private function requiredCapabilityName(): string
