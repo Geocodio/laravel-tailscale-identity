@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "geocodio/laravel-tailscale-identity",
+    "description": "Tailscale tailnet identity and capability resolution for Laravel — whois-based, fail-closed",
     "keywords": [
-        ":vendor_name",
+        "Geocodio",
         "laravel",
-        ":package_slug"
+        "laravel-tailscale-identity"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/geocodio/laravel-tailscale-identity",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Mathias Hansen",
+            "email": "mathias@geocod.io",
             "role": "Developer"
         }
     ],
@@ -30,19 +30,16 @@
         "pestphp/pest-plugin-laravel": "^4.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "spatie/laravel-ray": "^1.35"
+        "phpstan/phpstan-phpunit": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Geocodio\\TailscaleIdentity\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "Geocodio\\TailscaleIdentity\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -63,11 +60,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
-            }
+                "Geocodio\\TailscaleIdentity\\TailscaleIdentityServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
