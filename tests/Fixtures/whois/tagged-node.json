@@ -1,0 +1,17 @@
+{
+    "Node": {
+        "Name": "server.example.ts.net.",
+        "Addresses": [
+            "100.101.102.103/32"
+        ],
+        "Tags": [
+            "tag:server"
+        ]
+    },
+    "UserProfile": {
+        "ID": 1,
+        "LoginName": "server.example.ts.net",
+        "DisplayName": "server"
+    },
+    "CapMap": null
+}

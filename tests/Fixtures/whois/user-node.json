@@ -1,0 +1,33 @@
+{
+    "Node": {
+        "ID": 1234567890,
+        "StableID": "nExample11CNTRL",
+        "Name": "laptop.example.ts.net.",
+        "Addresses": [
+            "100.101.102.103/32",
+            "fd7a:115c:a1e0::1234/128"
+        ],
+        "AllowedIPs": [
+            "100.101.102.103/32",
+            "fd7a:115c:a1e0::1234/128"
+        ],
+        "Hostinfo": {
+            "OS": "macOS",
+            "Hostname": "laptop"
+        },
+        "Online": true,
+        "ComputedName": "laptop"
+    },
+    "UserProfile": {
+        "ID": 123456789,
+        "LoginName": "User@example.com",
+        "DisplayName": "Example User"
+    },
+    "CapMap": {
+        "example.com/cap/my-app": [
+            {
+                "role": "admin"
+            }
+        ]
+    }
+}

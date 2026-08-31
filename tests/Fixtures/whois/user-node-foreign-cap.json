@@ -1,0 +1,19 @@
+{
+    "Node": {
+        "Name": "laptop.example.ts.net.",
+        "Addresses": [
+            "100.101.102.103/32"
+        ]
+    },
+    "UserProfile": {
+        "LoginName": "user@example.com",
+        "DisplayName": "Example User"
+    },
+    "CapMap": {
+        "example.com/cap/other-app": [
+            {
+                "role": "admin"
+            }
+        ]
+    }
+}
