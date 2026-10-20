@@ -17,5 +17,6 @@ final readonly class TailscaleIdentity
         public string $nodeName,
         public string $peerAddress,
         public array $capabilities,
+        public ?string $profilePictureUrl = null,
     ) {}
 }

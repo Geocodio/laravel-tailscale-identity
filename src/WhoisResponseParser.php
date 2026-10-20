@@ -53,7 +53,22 @@ final class WhoisResponseParser
             nodeName: (string) ($node['Name'] ?? ''),
             peerAddress: $remoteAddr,
             capabilities: $this->extractCapabilities($data, $capabilityName),
+            profilePictureUrl: $this->extractProfilePictureUrl($profile),
         );
+    }
+
+    /**
+     * Only https URLs are exposed; empty, missing, or any other scheme is null.
+     *
+     * @param  array<string, mixed>  $profile
+     */
+    private function extractProfilePictureUrl(array $profile): ?string
+    {
+        $url = $profile['ProfilePicURL'] ?? null;
+
+        return is_string($url) && str_starts_with(strtolower($url), 'https://') && strlen($url) > 8
+            ? $url
+            : null;
     }
 
     /**

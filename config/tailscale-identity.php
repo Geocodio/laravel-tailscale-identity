@@ -27,6 +27,8 @@ return [
         'display_name' => env('TAILSCALE_IDENTITY_FAKE_NAME', 'Fake Identity'),
         // Capability objects the fake identity carries, e.g. [['role' => 'admin']].
         'capabilities' => [['role' => 'admin']],
+        // Optional https profile picture URL the fake identity carries.
+        'profile_picture_url' => env('TAILSCALE_IDENTITY_FAKE_PICTURE_URL'),
     ],
 
 ];

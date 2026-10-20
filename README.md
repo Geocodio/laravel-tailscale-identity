@@ -124,6 +124,7 @@ $identity->displayName;  // "Person Example"
 $identity->nodeName;     // "laptop.example.ts.net."
 $identity->peerAddress;  // "100.101.102.103"
 $identity->capabilities; // [["role" => "admin"], ...] — raw grant values
+$identity->profilePictureUrl; // "https://..." or null (https URLs only)
 ```
 
 A typical app layers just-in-time provisioning on top in its own middleware:
