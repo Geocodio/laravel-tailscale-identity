@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tailscale-identity` will be documented in this file.
 
+## v0.2.0 - 2026-10-20
+
+Adds `TailscaleIdentity::$profilePictureUrl` (from whois `UserProfile.ProfilePicURL`, https only). `FakeIdentityDriver` accepts it via `tailscale-identity.fake.profile_picture_url`. Whois cache key prefix bumped to `v2`.
+
 ## v0.1.0 - 2026-08-31
 
 Initial release.
