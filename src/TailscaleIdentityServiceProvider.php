@@ -35,6 +35,7 @@ final class TailscaleIdentityServiceProvider extends PackageServiceProvider
                     email: config('tailscale-identity.fake.email'),
                     displayName: (string) config('tailscale-identity.fake.display_name'),
                     capabilities: (array) config('tailscale-identity.fake.capabilities'),
+                    profilePictureUrl: config('tailscale-identity.fake.profile_picture_url') ?: null,
                 ),
                 default => throw new \InvalidArgumentException("Unknown Tailscale identity driver [{$driver}]."),
             };

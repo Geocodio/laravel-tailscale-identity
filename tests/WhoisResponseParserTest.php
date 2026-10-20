@@ -25,7 +25,26 @@ it('parses a user node into an identity with lowercased email and capability val
         ->and($identity->displayName)->toBe('Example User')
         ->and($identity->nodeName)->toBe('laptop.example.ts.net.')
         ->and($identity->peerAddress)->toBe('100.101.102.103')
-        ->and($identity->capabilities)->toBe([['role' => 'admin']]);
+        ->and($identity->capabilities)->toBe([['role' => 'admin']])
+        ->and($identity->profilePictureUrl)->toBe('https://example.com/avatar.png');
+});
+
+it('returns a null profile picture URL unless it is a non-empty https URL', function (mixed $value) {
+    $data = json_decode(whoisFixture('user-node'), true);
+    $data['UserProfile']['ProfilePicURL'] = $value;
+
+    $identity = (new WhoisResponseParser)->parse(json_encode($data), '100.101.102.103', CAP);
+
+    expect($identity->profilePictureUrl)->toBeNull();
+})->with(['', 'http://example.com/a.png', 'javascript:alert(1)', 'https://', 123, null]);
+
+it('returns a null profile picture URL when the field is missing', function () {
+    $data = json_decode(whoisFixture('user-node'), true);
+    unset($data['UserProfile']['ProfilePicURL']);
+
+    $identity = (new WhoisResponseParser)->parse(json_encode($data), '100.101.102.103', CAP);
+
+    expect($identity->profilePictureUrl)->toBeNull();
 });
 
 it('returns every capability object when multiple grants apply', function () {

@@ -18,6 +18,13 @@ it('returns the configured fake identity', function () {
         ->and($identity->capabilities)->toBe([['role' => 'admin']]);
 });
 
+it('returns the configured profile picture URL, null by default', function () {
+    $with = new FakeIdentityDriver('dev@example.com', profilePictureUrl: 'https://example.com/a.png');
+
+    expect($with->identify('100.64.0.9')->profilePictureUrl)->toBe('https://example.com/a.png')
+        ->and((new FakeIdentityDriver('dev@example.com'))->identify('100.64.0.9')->profilePictureUrl)->toBeNull();
+});
+
 it('rejects when no fake identity is configured', function () {
     (new FakeIdentityDriver(null))->identify('100.64.0.9');
 })->throws(IdentityRejectedException::class);

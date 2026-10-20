@@ -13,6 +13,7 @@ final readonly class FakeIdentityDriver implements IdentityDriver
         private ?string $email,
         private string $displayName = 'Fake Identity',
         private array $capabilities = [],
+        private ?string $profilePictureUrl = null,
     ) {}
 
     public function identify(string $remoteAddr): TailscaleIdentity
@@ -27,6 +28,7 @@ final readonly class FakeIdentityDriver implements IdentityDriver
             nodeName: 'fake-node.example.ts.net.',
             peerAddress: $remoteAddr,
             capabilities: $this->capabilities,
+            profilePictureUrl: $this->profilePictureUrl,
         );
     }
 }

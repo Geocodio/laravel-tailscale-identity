@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Process;
  */
 final readonly class TailscaleWhoisDriver implements IdentityDriver
 {
-    public const CACHE_PREFIX = 'tailscale-identity:v1:';
+    public const CACHE_PREFIX = 'tailscale-identity:v2:';
 
     public function __construct(
         private WhoisResponseParser $parser,
@@ -62,6 +62,7 @@ final readonly class TailscaleWhoisDriver implements IdentityDriver
                     'nodeName' => $identity->nodeName,
                     'peerAddress' => $identity->peerAddress,
                     'capabilities' => $identity->capabilities,
+                    'profilePictureUrl' => $identity->profilePictureUrl,
                 ];
             },
         );
@@ -72,6 +73,7 @@ final readonly class TailscaleWhoisDriver implements IdentityDriver
             nodeName: $fields['nodeName'],
             peerAddress: $fields['peerAddress'],
             capabilities: $fields['capabilities'],
+            profilePictureUrl: $fields['profilePictureUrl'],
         );
     }
 }
